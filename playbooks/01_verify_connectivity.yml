@@ -1,22 +1,9 @@
 ---
-- name: VERIFY CONNECTIVITY
-  hosts: 192.168.101.1 192.168.101.2
-  gather_facts: false
-  connection: local
-
-  tasks:
-    - name: Ping the router to test connectivity
-      wait_for:
-        host: 192.168.101.1
-        port: 22
-        state: started
-        delay: 0
-        timeout: 3
-
-    - name: Ping the swtich to test connectivity
-      wait_for:
-        host: 192.168.101.2
-        port: 22
-        state: started
-        delay: 0
-        timeout: 3
+  - name: VERIFY CONNECTIVITY
+    hosts: all
+    gather_facts: false
+    connection: local
+  
+    tasks:
+      - name: Ping the router and switch to test connectivity
+        ping:

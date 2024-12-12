@@ -1,21 +1,24 @@
 ---
 - name: NETWORK CONFIGURATION
-  hosts: 192.168.101.1 192.168.101.2
+  hosts: router
   gather_facts: false
-  connection: local
+  vars:
+    ansible_user: admin
+    ansible_password: cisco123
+    ansible_become: yes
+    ansible_become_password: cisco123
+    ansible_connection: network_cli
 
   tasks:
     - name: SETUP G0/0/1
-      host: 192.168.101.1
       ios_config:
-        parents: interface GigabitEthernet0/0/1
+        parents: "interface GigabitEthernet0/0/1"
         lines:
             - description Interface made with Ansible
             - ip address 192.168.30.1 255.255.255.0
             - no shutdown
 
     - name: SHOW IP INTERFACE
-      host: 192.168.101.1
       ios_command:
         commands:
             - show ip interface brief
@@ -24,24 +27,4 @@
     - name: SAVE OUTPUT OF ROUTER CHANGE
       copy:
         content: "{{  output.stdout[0]  }}"
-        dest: "ios_configurations/gig0/0/1_ouput_{{  inventory_hostname  }}.txt"
-
-    - name: SHUTDOWN UNUSED PORTS
-      host: 192.168.101.2
-      ios_config:
-        parents: interface range FastEthernet0/3-24
-        lines: 
-            - description Unused interface
-            - shutdown
-    
-    - name: SHOW IP INTERFACE
-      host: 192.168.101.2
-      ios_command:
-        commands:
-            - show ip interface brief
-        register: output
-
-    - name: SAVE OUTPUT OF SWITCH CHANGE
-      copy:
-        content: "{{  output.stdout[0]  }}"
-        dest: "ios_configurations/switch_changes_{{ inventory_hostname }}.txt"
+        dest: "ios_configurations/gig1_ouput_{{  inventory_hostname  }}.txt"

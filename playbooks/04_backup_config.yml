@@ -1,8 +1,13 @@
 ---
 - name: Backup running configuration of Cisco devices
-  hosts: routers, switches
-  gather_facts: no
-  connection: local
+  hosts: all
+  gather_facts: false
+  vars:
+    ansible_user: admin
+    ansible_password: cisco123
+    ansible_become: yes
+    ansible_become_password: cisco123
+    ansible_connection: network_cli
   
   tasks:
     - name: DISPLAY RUNNING_CONFIG
