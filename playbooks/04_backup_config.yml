@@ -1,0 +1,17 @@
+---
+- name: Backup running configuration of Cisco devices
+  hosts: routers, switches
+  gather_facts: no
+  connection: local
+  
+  tasks:
+    - name: DISPLAY RUNNING_CONFIG
+      ios_command:
+        commands:
+          - show running-config
+      register: config
+
+    - name: SAVE OUTPUT TO ./backups/
+      copy:
+        content: "{{ config.stdout[0] }}"   
+        dest: "backups/show_run_{{ inventory_hostname }}.txt"  
