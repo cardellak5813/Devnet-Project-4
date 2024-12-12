@@ -2,6 +2,7 @@
 - name: VERIFY CONNECTIVITY
   hosts: 192.168.101.1 192.168.101.2
   gather_facts: false
+  connection: local
 
   tasks:
     - name: Ping the router to test connectivity
