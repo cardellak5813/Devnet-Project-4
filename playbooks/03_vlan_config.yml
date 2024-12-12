@@ -1,0 +1,30 @@
+---
+- name: Create VLANs on switches
+  hosts: switches
+  gather_facts: no
+  tasks:
+    - name: Create VLAN 102 (Test)
+      ios_config:
+        lines:
+          - vlan 102
+          - name Test
+    
+    - name: Create VLAN 103 (Test2)
+      ios_config:
+        lines:
+          - vlan 103
+          - name Test2
+
+    - name: Configure VLAN 102 interface
+      ios_config:
+        lines:
+          - interface vlan 102
+          - ip address 192.168.102.2 255.255.255.0
+          - no shutdown
+
+    - name: Configure VLAN 103 interface
+      ios_config:
+        lines:
+          - interface vlan 103
+          - ip address 192.168.103.2 255.255.255.0
+          - no shutdown
