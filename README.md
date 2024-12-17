@@ -32,9 +32,10 @@ Run Ansible playbooks:
 
 bash
 Copy code
-ansible-playbook playbook1.yml
-ansible-playbook playbook2.yml
-ansible-playbook playbook3.yml
+ansible-playbook 01_verify_connectivity.yml
+ansible-playbook 02_basic_config.yml
+ansible-playbook 03_vlan_config.yml
+ansible-playbook 04_backup_config.yml
 
 
 Verify CI/CD pipeline:
