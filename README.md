@@ -8,7 +8,7 @@ Steps to Run:
 Clone the repository:
 
 bash
-Copy code
+Copy code 
 git clone <repository-url>
 cd <project-folder>
 
@@ -31,11 +31,11 @@ pip install -r requirements.txt
 Run Ansible playbooks:
 
 bash
-Copy code
-ansible-playbook 01_verify_connectivity.yml
-ansible-playbook 02_basic_config.yml
-ansible-playbook 03_vlan_config.yml
-ansible-playbook 04_backup_config.yml
+Copy code 
+  ansible-playbook 01_verify_connectivity.yml
+  ansible-playbook 02_basic_config.yml
+  ansible-playbook 03_vlan_config.yml
+  ansible-playbook 04_backup_config.yml
 
 
 Verify CI/CD pipeline:
